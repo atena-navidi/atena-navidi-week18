@@ -1,6 +1,5 @@
 import * as Yup from "yup";
 
-// schema به صورت تابع تا بتواند contacts و editingContactId را دریافت کند
 export const contactSchema = (contacts, editingContactId) =>
   Yup.object().shape({
     name: Yup.string().trim().required("Name is required"),
@@ -11,7 +10,9 @@ export const contactSchema = (contacts, editingContactId) =>
       .test("unique-email", "Email already exists", (value) => {
         if (!value) return true;
         return !contacts.some(
-          (c) => c.email === value && (editingContactId ? c.id !== editingContactId : true)
+          (c) =>
+            c.email === value &&
+            (editingContactId ? c.id !== editingContactId : true)
         );
       }),
     phone: Yup.string()
@@ -20,7 +21,9 @@ export const contactSchema = (contacts, editingContactId) =>
       .test("unique-phone", "Phone already exists", (value) => {
         if (!value) return true;
         return !contacts.some(
-          (c) => c.phone === value && (editingContactId ? c.id !== editingContactId : true)
+          (c) =>
+            c.phone === value &&
+            (editingContactId ? c.id !== editingContactId : true)
         );
       }),
   });

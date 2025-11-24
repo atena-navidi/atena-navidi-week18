@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { contactSchema } from "../validation/contactSchema";
@@ -13,33 +13,44 @@ const FormModal = () => {
     saveHandler,
     contacts,
   } = useContacts();
-  
+
   const {
     register,
     handleSubmit,
     reset,
     setError,
     formState: { errors },
-    getValues,
   } = useForm({
     resolver: yupResolver(contactSchema(contacts, editingContactId)),
     mode: "onSubmit",
-    defaultValues: contact || { name: "", lastName: "", email: "", phone: "" },
+    defaultValues: { name: "", lastName: "", email: "", phone: "" },
   });
 
-  // reset هنگام باز شدن فرم
-  useEffect(() => {
-    if (isFormOpen) {
-      reset(contact || { name: "", lastName: "", email: "", phone: "" });
-    }
-  }, [contact, isFormOpen, reset]);
+  const [readyToRender, setReadyToRender] = useState(false);
 
-  if (!isFormOpen) return null;
+  useEffect(() => {
+    if (!isFormOpen) {
+      Promise.resolve().then(() => setReadyToRender(false));
+      return;
+    }
+
+    if (editingContactId) {
+      if (contact) {
+        reset(contact);
+        Promise.resolve().then(() => setReadyToRender(true));
+
+      }
+    } else {
+      reset({ name: "", lastName: "", email: "", phone: "" });
+      Promise.resolve().then(() => setReadyToRender(true));
+     
+    }
+  }, [isFormOpen, contact, editingContactId, reset]);
+
+  if (!readyToRender) return null;
 
   const onSubmit = (data) => {
 
-    console.log("Form Data on Submit:", data);
-    console.log("Values from getValues():", getValues());
 
     let hasError = false;
 
@@ -66,8 +77,8 @@ const FormModal = () => {
 
   return (
     <div
-      onClick={closeFormHandler}
       className="fixed inset-0 bg-black/30 backdrop-blur-sm flex justify-center items-center z-50"
+      onClick={closeFormHandler}
     >
       <div
         onClick={(e) => e.stopPropagation()}
