@@ -1,13 +1,19 @@
-
 import { useContacts } from "../context/ContactsContext";
 
 const ContactsList = () => {
-  const { filteredContacts, toggleSelect, selectedContacts, openForm, deleteHandler } = useContacts();
+  const {
+    filteredContacts,
+    toggleSelect,
+    selectedContacts,
+    openForm,
+    deleteHandler,
+  } = useContacts();
 
   if (filteredContacts.length === 0) {
     return (
       <p className="text-center text-gray-300 mt-10">
-        No contacts yet — click <span className="font-semibold">+</span> to add one!
+        No contacts yet — click <span className="font-semibold">+</span> to add
+        one!
       </p>
     );
   }

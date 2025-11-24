@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { initialContacts } from "../data/initialContacts";
@@ -87,7 +85,8 @@ const useContactsLogic = () => {
   );
 
   // Contact selected for editing
-  const contactForEdit = contacts.find((c) => c.id === editingContactId) || null;
+  const contactForEdit =
+    contacts.find((c) => c.id === editingContactId) || null;
 
   return {
     contacts,

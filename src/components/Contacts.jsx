@@ -1,4 +1,3 @@
-
 import { useContacts } from "../context/ContactsContext";
 import FormModal from "./FormModal";
 import ConfirmModal from "./ConfirmModal";
@@ -13,7 +12,9 @@ const Contacts = () => {
       {isFormOpen && <FormModal />}
 
       {contactToDelete &&
-        (Array.isArray(contactToDelete) ? contactToDelete.length > 0 : true) && (
+        (Array.isArray(contactToDelete)
+          ? contactToDelete.length > 0
+          : true) && (
           <ConfirmModal
             title="Delete Contact"
             message={

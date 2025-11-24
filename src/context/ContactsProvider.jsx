@@ -1,4 +1,3 @@
-
 import { ContactsContext } from "./ContactsContext";
 import useContactsLogic from "../hooks/useContactsLogic";
 

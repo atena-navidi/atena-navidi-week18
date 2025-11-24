@@ -1,5 +1,3 @@
-
-
 import { useContacts } from "../context/ContactsContext";
 
 const ConfirmModal = ({ title, message }) => {

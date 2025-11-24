@@ -81,7 +81,9 @@ const FormModal = () => {
               errors.name ? "border-red-500" : "border-gray-300"
             }`}
           />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
 
           <input
             type="text"
@@ -91,7 +93,9 @@ const FormModal = () => {
               errors.lastName ? "border-red-500" : "border-gray-300"
             }`}
           />
-          {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
+          {errors.lastName && (
+            <p className="text-red-500 text-sm">{errors.lastName.message}</p>
+          )}
 
           <input
             type="email"
@@ -101,7 +105,9 @@ const FormModal = () => {
               errors.email ? "border-red-500" : "border-gray-300"
             }`}
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
 
           <input
             type="text"
@@ -111,7 +117,9 @@ const FormModal = () => {
               errors.phone ? "border-red-500" : "border-gray-300"
             }`}
           />
-          {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
+          {errors.phone && (
+            <p className="text-red-500 text-sm">{errors.phone.message}</p>
+          )}
 
           <div className="flex justify-end gap-2 mt-4">
             <button
@@ -135,4 +143,3 @@ const FormModal = () => {
 };
 
 export default FormModal;
-

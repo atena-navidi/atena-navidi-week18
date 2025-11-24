@@ -1,4 +1,3 @@
-
 import { useContacts } from "../context/ContactsContext";
 
 const ContactActions = () => {
