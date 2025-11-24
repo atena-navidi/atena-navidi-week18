@@ -1,5 +1,3 @@
-// src/components/FormModal.jsx
-
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,18 +13,21 @@ const FormModal = () => {
     saveHandler,
     contacts,
   } = useContacts();
-
+  
   const {
     register,
     handleSubmit,
     reset,
     setError,
     formState: { errors },
+    getValues,
   } = useForm({
-    resolver: yupResolver(contactSchema),
+    resolver: yupResolver(contactSchema(contacts, editingContactId)),
     mode: "onSubmit",
+    defaultValues: contact || { name: "", lastName: "", email: "", phone: "" },
   });
 
+  // reset هنگام باز شدن فرم
   useEffect(() => {
     if (isFormOpen) {
       reset(contact || { name: "", lastName: "", email: "", phone: "" });
@@ -36,6 +37,10 @@ const FormModal = () => {
   if (!isFormOpen) return null;
 
   const onSubmit = (data) => {
+
+    console.log("Form Data on Submit:", data);
+    console.log("Values from getValues():", getValues());
+
     let hasError = false;
 
     const duplicateEmail = contacts.some(
